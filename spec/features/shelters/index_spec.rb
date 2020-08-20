@@ -14,6 +14,14 @@ RSpec.describe "Shelters Index Page" do
       expect(page).to have_content("#{@shelter2.name}")
     end
 
+    it "I see the name-links of each shelter in the system" do
+      visit '/shelters'
+
+      expect(page).to have_link("#{@shelter1.name}")
+      click_link "#{@shelter1.name}"
+      expect(current_path).to eq("/shelters/#{@shelter1.id}")
+    end
+
     it "I see an update shelter link next to each shelter, which takes me to the edit form." do
       visit '/shelters'
       within "#shelter-#{@shelter1.id}" do
