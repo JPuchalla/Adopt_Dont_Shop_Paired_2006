@@ -5,10 +5,10 @@
   <% @pets.each do |pet| %>
     <section id='pet-<%=pet.id%>'>
       <p><%= image_tag(pet.image) %></p>
-      <h3><%= pet.name %></h3>
+      <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>></h3>
       <p>Age: <%= pet.age %></p>
       <p>Sex: <%= pet.sex %></p>
-      <p>Shelter: <%= pet.shelter.name %></p>
+      <p>Shelter: <%= link_to "#{pet.shelter.name}", "/shelters/#{pet.shelter.id}"%></p>
       <p><%= link_to "Edit Pet Info", "/pets/#{pet.id}/edit" %></p><br>
       <p><%= link_to "Delete Pet", "/pets/#{pet.id}", method: :delete %></p><br><br>
     </section>

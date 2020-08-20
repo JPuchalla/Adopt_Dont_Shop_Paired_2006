@@ -25,6 +25,14 @@ RSpec.describe "Pets index page" do
       expect(page).to have_content("#{@shelter2.name}")
     end
 
+    it "I see the name-links of each pet in the system" do
+      visit '/pets'
+
+      expect(page).to have_link("#{@pet1.name}")
+      click_link "#{@pet1.name}"
+      expect(current_path).to eq("/pets/#{@pet1.id}")
+    end
+
     it "I see an edit pet info link next to each pet, which takes me to the edit form." do
       visit '/pets'
       within "#pet-#{@pet1.id}" do
