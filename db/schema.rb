@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_001747) do
+ActiveRecord::Schema.define(version: 2020_08_20_144216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2020_08_18_001747) do
     t.bigint "shelter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "status", default: "Adoptable"
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 
