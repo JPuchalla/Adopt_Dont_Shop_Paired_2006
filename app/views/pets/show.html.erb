@@ -3,4 +3,6 @@
 <p>About: <%= @pet.description %></p>
 <p>Age: <%= @pet.age %></p>
 <p>Sex: <%= @pet.sex %></p>
-<p>Status: <%= @pet.status %></p>
+<p>Status: <%= @pet.status %></p><br>
+
+<p><%= link_to "Edit Pet Info", "/pets/#{@pet.id}/edit" %></p>
