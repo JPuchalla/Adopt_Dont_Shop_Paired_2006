@@ -1,0 +1,11 @@
+<h1><%= link_to "#{@shelter.name}", "/shelters/#{@shelter.id}" %> Pets</h1>
+
+<% @shelter.pets.each do |pet| %>
+  <p><%= image_tag(pet.image) %></p>
+  <h3><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>></h3>
+  <p>Age: <%= pet.age %></p>
+  <p>Sex: <%= pet.sex %></p>
+  <p>Status: <%= pet.status %></p><br><br>
+<% end %>
+
+<p> <%= link_to "Add New Pet", "/shelters/#{@shelter.id}/pets/new", method: :get %></p>
