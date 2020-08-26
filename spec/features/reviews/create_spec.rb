@@ -38,5 +38,25 @@ RSpec.describe "Shelters Show Page Reviews" do
         expect(page).to have_content(title)
       end
     end
+    
+    it "Create review sad path" do
+      title = "Okay place"
+      rating = ""
+      content = "Nothing special. Just average."
+
+      @new_review = Review.last
+
+      visit "/shelters/#{@shelter1.id}"
+      click_link "New Review"
+
+      fill_in :title, with: title
+      fill_in :rating, with: rating
+      fill_in :content, with: content
+
+      click_on "Create Review"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
+      expect(page).to have_content("Please enter title, rating, and content in order to submit a review.")
+    end
   end
 end
