@@ -10,4 +10,5 @@
  <p>Rating: <%= review.rating %>/5</p>
  <p>Comments: <%= review.content %></p>
  <p><%= image_tag(review.image, width: 300) unless review.image.nil? %></p> <br> <br>
- <% end %>
+<% end %>
+<p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>
