@@ -1,17 +1,5 @@
 require "rails_helper"
-# User Story 3, Shelter Review Creation
 
-# As a visitor,
-# When I visit a shelter's show page
-# I see a link to add a new review for this shelter.
-# When I click on this link, I am taken to a new review path
-# On this new page, I see a form where I must enter:
-# - title
-# - rating
-# - content
-# I also see a field where I can enter an optional image (web address)
-# When the form is submitted, I should return to that shelter's show page
-# and I can see my new review
 RSpec.describe "Shelters Show Page Reviews" do
   describe "When I visit the shelters show page" do
     before(:each) do
@@ -20,12 +8,35 @@ RSpec.describe "Shelters Show Page Reviews" do
       @review1 = @shelter1.reviews.create!(title: "Terrible Vet", rating: 2, content: "Dog poops everywhere. Not house trained.", image: "https://expertphotography.com/wp-content/uploads/2018/11/dog-photography-eyes.jpg")
       @review2 = @shelter1.reviews.create!(title: "Top notch service.", rating: 5, content: "Groomed my dog, she smells so good!")
     end
-    it "I see a link to add a new review for this shelter" do
 
+    it "I see a link to add a new review for this shelter" do
       visit "/shelters/#{@shelter1.id}"
       expect(page).to have_link("New Review")
       click_link "New Review"
       expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
+    end
+
+    it "I see a form to enter in review information and redirected to show page" do
+      title = "Okay place"
+      rating = 3
+      content = "Nothing special. Just average."
+
+      @new_review = Review.last
+
+      visit "/shelters/#{@shelter1.id}"
+      click_link "New Review"
+
+      fill_in :title, with: title
+      fill_in :rating, with: rating
+      fill_in :content, with: content
+
+      click_on "Create Review"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}")
+
+      within "#reviews-#{@new_review.id}" do
+        expect(page).to have_content(title)
+      end
     end
   end
 end
