@@ -11,7 +11,8 @@
   <p>Rating: <%= review.rating %>/5</p>
   <p>Comments: <%= review.content %></p>
   <p><%= image_tag(review.image, width: 300) unless review.image.nil? %></p><br>
-  <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit"%></p><br><br>
+  <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit"%></p>
+  <p><%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete%></p><br><br>
 </section>
 <% end %>
 <p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>
