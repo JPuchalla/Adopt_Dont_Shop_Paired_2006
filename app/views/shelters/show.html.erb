@@ -4,3 +4,15 @@
 <p><%= link_to "#{@shelter.name} Pet's", "/shelters/#{@shelter.id}/pets"%></p>
 <p><%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit"%></p>
 <p><%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete%></p>
+<h3>Reviews</h3>
+<% @shelter.reviews.each do |review| %>
+<section id='reviews-<%=review.id%>'>
+  <h4><%= review.title %></h4>
+  <p>Rating: <%= review.rating %>/5</p>
+  <p>Comments: <%= review.content %></p>
+  <p><%= image_tag(review.image, width: 300) unless review.image.nil? %></p><br>
+  <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit"%></p>
+  <p><%= link_to "Delete Review", "/shelters/#{@shelter.id}/reviews/#{review.id}", method: :delete%></p><br><br>
+</section>
+<% end %>
+<p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>
