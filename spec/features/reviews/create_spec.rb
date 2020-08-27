@@ -36,16 +36,13 @@ RSpec.describe "Shelters Show Page Reviews" do
     end
 
     it "Create review sad path" do
-      title = "Okay place"
-      rating = ""
-      content = "Nothing special. Just average."
 
       visit "/shelters/#{@shelter1.id}"
       click_link "New Review"
 
-      fill_in :title, with: title
-      fill_in :rating, with: rating
-      fill_in :content, with: content
+      fill_in :title, with: "Okay place"
+      fill_in :rating, with: ""
+      fill_in :content, with: "Nothing special. Just average."
 
       click_on "Create Review"
 

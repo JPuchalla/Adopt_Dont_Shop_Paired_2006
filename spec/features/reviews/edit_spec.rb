@@ -39,12 +39,21 @@ RSpec.describe "Shelters Show Page Reviews" do
 
       expect(page).to have_content(title)
     end
+
+    it "Review edit and update sad path" do
+
+      visit "/shelters/#{@shelter1.id}"
+      within "#reviews-#{@review1.id}" do
+        click_link "Edit Review"
+      end
+
+      fill_in :title, with: ""
+
+      click_on "Update Review"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/#{@review1.id}/edit")
+
+      expect(page).to have_content("Title, rating, and content are required in order to edit review.")
+    end
   end
 end
-
-# User Story 6, Edit a Shelter Review, cont.
-#
-# As a visitor,
-# When I fail to enter a title, a rating, and/or content in the edit shelter review form, but still try to submit the form
-# I see a flash message indicating that I need to fill in a title, rating, and content in order to edit a shelter review
-# And I'm returned to the edit form to edit that review

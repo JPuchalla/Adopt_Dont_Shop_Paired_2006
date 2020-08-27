@@ -5,8 +5,7 @@ class ReviewsController < ApplicationController
 
   def create
     @shelter = Shelter.find(params[:id])
-    review = @shelter.reviews.create(create_review_params)
-
+    review = @shelter.reviews.create(create_update_review_params)
     if review.save
       redirect_to "/shelters/#{@shelter.id}"
     else
@@ -23,8 +22,13 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:review_id])
-    review.update(create_update_review_params)
-    redirect_to "/shelters/#{params[:id]}"
+    shelter = Shelter.find(params[:id])
+    if review.update(create_update_review_params)
+      redirect_to "/shelters/#{params[:id]}"
+    else
+      flash[:notice] = "Title, rating, and content are required in order to edit review."
+      redirect_to "/shelters/#{shelter.id}/reviews/#{review.id}/edit"
+    end
   end
 
   private
@@ -34,8 +38,15 @@ class ReviewsController < ApplicationController
   end
 
   def create_update_review_params
-    c = review_params.to_hash
-    c["image"] = nil if c["image"].empty?
-    c
+    rp = review_params.to_hash
+    rp["image"] = nil if rp["image"].empty?
+    rp
+    # review_params[:image] = nil if review_params[:image].empty?
   end
+
+  # def review_params
+  #    params_allowed = [:title, :rating, :content]
+  #    params_allowed << :image if !["image"].empty?
+  #    params.permit(params_allowed)
+  # end
 end
