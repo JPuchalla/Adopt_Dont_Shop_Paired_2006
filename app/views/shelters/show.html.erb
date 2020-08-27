@@ -10,7 +10,8 @@
   <h4><%= review.title %></h4>
   <p>Rating: <%= review.rating %>/5</p>
   <p>Comments: <%= review.content %></p>
-  <p><%= image_tag(review.image, width: 300) unless review.image.nil? %></p> <br> <br>
-  <% end %>
+  <p><%= image_tag(review.image, width: 300) unless review.image.nil? %></p><br>
+  <p><%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit"%></p><br><br>
 </section>
+<% end %>
 <p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>

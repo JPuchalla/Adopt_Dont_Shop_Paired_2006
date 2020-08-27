@@ -21,8 +21,6 @@ RSpec.describe "Shelters Show Page Reviews" do
       rating = 3
       content = "Nothing special. Just average."
 
-      @new_review = Review.last
-
       visit "/shelters/#{@shelter1.id}"
       click_link "New Review"
 
@@ -34,17 +32,13 @@ RSpec.describe "Shelters Show Page Reviews" do
 
       expect(current_path).to eq("/shelters/#{@shelter1.id}")
 
-      within "#reviews-#{@new_review.id}" do
-        expect(page).to have_content(title)
-      end
+      expect(page).to have_content(title)
     end
-    
+
     it "Create review sad path" do
       title = "Okay place"
       rating = ""
       content = "Nothing special. Just average."
-
-      @new_review = Review.last
 
       visit "/shelters/#{@shelter1.id}"
       click_link "New Review"
