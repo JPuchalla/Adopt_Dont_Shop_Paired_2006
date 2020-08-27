@@ -48,12 +48,5 @@ class ReviewsController < ApplicationController
     rp = review_params.to_hash
     rp["image"] = nil if rp["image"].empty?
     rp
-    # review_params[:image] = nil if review_params[:image].empty?
   end
-
-  # def review_params
-  #    params_allowed = [:title, :rating, :content]
-  #    params_allowed << :image if !["image"].empty?
-  #    params.permit(params_allowed)
-  # end
 end
