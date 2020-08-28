@@ -14,4 +14,10 @@ class Favorites
     @pets[pet_id] ||= 0
     @pets[pet_id] += 1
   end
+
+  def favorite_pets
+    @pets.keys.map do |pet_key|
+      Pet.find(pet_key.to_i)
+    end
+  end
 end
