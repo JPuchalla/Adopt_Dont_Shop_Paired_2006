@@ -2,6 +2,7 @@ class PetsController < ApplicationController
 
   def index
     @pets = Pet.all
+    favorites = Favorites.new(session[:favorites])
   end
 
   def show
@@ -21,7 +22,7 @@ class PetsController < ApplicationController
   def destroy
     pet = Pet.find(params[:id])
     pet.destroy
-    redirect_to "/pets" 
+    redirect_to "/pets"
   end
 
   private

@@ -8,4 +8,10 @@ class Favorites
   def total_count
     @pets.values.sum
   end
-end 
+
+  def add_pet(id)
+    pet_id = id.to_s
+    @pets[pet_id] ||= 0
+    @pets[pet_id] += 1
+  end
+end
