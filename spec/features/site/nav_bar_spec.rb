@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe "layouts/application.html.erb" do
-  xit "should have navbar links to home, shelters, and pets." do
+  it "should have navbar links to home, shelters, and pets." do
     visit "/shelters"
     within(".navbar") do
       expect(page).to have_link("Home", href: "/")
