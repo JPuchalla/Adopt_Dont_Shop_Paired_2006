@@ -1,5 +1,7 @@
 <h1>Favorite Pets</h1>
-
+  <% if favorites.pets.empty? %>
+   <%= "No favorited pets." %>
+   <% end %>
   <% favorites.favorite_pets.each do |pet| %>
   <section id="favorites-#{pet.id}">
     <%= image_tag pet.image, width: 300 %>

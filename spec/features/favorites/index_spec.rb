@@ -31,4 +31,12 @@ RSpec.describe "Pet favorites index spec" do
     click_link "Favorites: 0"
     expect(current_path).to eq("/favorites")
   end
+
+  it "No Favorites Page flash message" do
+    visit "/favorites"
+    within ".navbar" do
+      expect(page).to have_content("Favorites: 0")
+    end
+    expect(page).to have_content("No favorited pets.")
+  end
 end
