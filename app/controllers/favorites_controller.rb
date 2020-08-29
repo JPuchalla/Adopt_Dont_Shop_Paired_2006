@@ -27,4 +27,11 @@ class FavoritesController < ApplicationController
     session[:favorites] = favorites.pets
     redirect_to "/favorites"
   end
+
+  def destroy_all
+    favorites = Favorites.new(session[:favorites])
+    favorites.pets.clear
+    session[:favorites] = favorites.pets
+    redirect_to "/favorites"
+  end
 end
