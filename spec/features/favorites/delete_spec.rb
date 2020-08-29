@@ -22,4 +22,17 @@ RSpec.describe "Pet favorites delete spec" do
       expect(page).to have_content("Favorites: 0")
     end
   end
+
+  it "Remove a Favorite from Favorites Page" do
+    visit "/pets/#{@pet1.id}"
+    click_button "Add To Favorites"
+    visit "/favorites"
+    expect(page).to have_button("Remove From Favorites")
+    click_button "Remove From Favorites"
+    expect(current_path).to eq("/favorites")
+    expect(page).to_not have_link(@pet1.name)
+    within ".navbar" do
+      expect(page).to have_content("Favorites: 0")
+    end
+  end
 end

@@ -25,4 +25,5 @@ RSpec.describe "Pets show Page" do
       expect(page).to have_content(@pet2.name)
     end
   end
+  
 end
