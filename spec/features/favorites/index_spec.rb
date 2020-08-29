@@ -24,6 +24,13 @@ RSpec.describe "Pet favorites index spec" do
     expect(page).to have_link("#{@pet2.name}")
     expect(page).to have_css("img[src*='#{@pet2.image}']")
   end
+
+
+  it "When I click on favorites indicator I'm taken to its index page" do
+    visit "/"
+    click_link "Favorites: 0"
+    expect(current_path).to eq("/favorites")
+  end
 end
 # User Story 11, Favorite Indicator links to Index Page
 #
