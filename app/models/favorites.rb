@@ -20,4 +20,8 @@ class Favorites
       Pet.find(pet_key.to_i)
     end
   end
+
+  def remove_pet(id)
+    @pets.delete_if {|pet_id, _| pet_id.to_i == id}
+  end
 end

@@ -5,6 +5,10 @@
 <p>Sex: <%= @pet.sex %></p>
 <p>Status: <%= @pet.status %></p><br>
 
-<p><%= button_to "Add To Favorites", "/favorites/#{@pet.id}", method: :patch %> </p>
+<% if favorites.pets.has_key?(@pet.id.to_s) %>
+<%= button_to "Remove From Favorites", "/favorites/#{@pet.id}", method: :delete %>
+<% else %>
+<%= button_to "Add To Favorites", "/favorites/#{@pet.id}", method: :patch %>
+<% end %>
 <p><%= link_to "Edit Pet Info", "/pets/#{@pet.id}/edit" %></p><br>
 <p><%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %></p>
