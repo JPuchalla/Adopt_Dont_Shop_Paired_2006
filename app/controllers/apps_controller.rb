@@ -20,6 +20,10 @@ class AppsController < ApplicationController
     end
   end
 
+  def show
+    @application = App.find(params[:id])
+  end
+
   private
 
   def application_params
