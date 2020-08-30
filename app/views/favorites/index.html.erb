@@ -6,8 +6,9 @@
      <section id="favorites-#{pet.id}">
        <%= image_tag pet.image, width: 300 %>
        <h3>Name: <%= link_to(pet.name, "/pets/#{pet.id}") %></h3>
-       <p><%= button_to "Remove From Favorites", "/favorites/#{pet.id}", method: :delete %></p>
+       <p><%= button_to "Remove From Favorites", "/favorites/#{pet.id}", method: :delete %></p><br>
      </section>
-     <% end %>
-   <%= button_to "Remove All Favorites", "/favorites", method: :delete %>
+     <% end %><br><br>
+   <%= button_to "Remove All Favorites", "/favorites", method: :delete %><br>
+   <%= button_to "Apply For Pets", "/apps/new", method: :get%><br><br>
    <% end %>
