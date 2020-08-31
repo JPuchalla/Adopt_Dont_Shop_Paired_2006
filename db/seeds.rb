@@ -22,3 +22,14 @@
 
 #Applications
 @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+@application2 = App.create!(name: "Red Foreman", address: "4567 Show Rd.", city: "Milwaukee", state: "Wisconsin", zip: "98765", phone_number: "1234567890", description: "Too many kids hanging out in the basement.")
+
+#Pet Applications
+PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
+
+PetApp.create!(pet_id: @pet2.id, app_id: @application1.id)
+PetApp.create!(pet_id: @pet2.id, app_id: @application2.id)
+
+PetApp.create!(pet_id: @pet3.id, app_id: @application1.id)
+PetApp.create!(pet_id: @pet3.id, app_id: @application2.id)
