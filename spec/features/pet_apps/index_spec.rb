@@ -1,3 +1,13 @@
+# User Story 20, Pet Applications Index Page
+#
+# As a visitor
+# When I visit a pets show page - /pets/:id
+# I see a link to view all applications for this pet - link All Applicants
+
+# When I click that link - redirected to index page
+# I can see a list of all the names of applicants for this pet - application1.name, application2.name
+# Each applicant's name is a link to their application show page
+
 require 'rails_helper'
 
 RSpec.describe "Pet Applications Index Page" do
