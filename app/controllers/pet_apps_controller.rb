@@ -5,4 +5,8 @@ class PetAppsController < ApplicationController
     pet_apps = PetApp.where(pet_id: params[:id])
     @current_applicants = pet_apps.map {|app| App.find(app.app_id)}
   end
+
+  def update
+
+  end
 end
