@@ -10,9 +10,6 @@ RSpec.describe "Pet Applications Index Page" do
 
     @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
     @application2 = App.create!(name: "Red Foreman", address: "4567 Show Rd.", city: "Milwaukee", state: "Wisconsin", zip: "98765", phone_number: "1234567890", description: "Too many kids hanging out in the basement.")
-
-    PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
-    PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
   end
 
   it "I visit a pets show page and see a link to view all applications for this pet" do
@@ -22,11 +19,18 @@ RSpec.describe "Pet Applications Index Page" do
   end
 
   it "Link takes me to index page with all pets applicants names" do
+    PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+    PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
     visit "pets/#{@pet1.id}"
     click_link "#{@pet1.name}'s Applicants"
     expect(current_path).to eq("/pets/#{@pet1.id}/apps")
 
     expect(page).to have_link(@application1.name)
     expect(page).to have_link(@application2.name)
+  end
+
+  it "Pet Applications Index sad path" do
+    visit "/pets/#{@pet1.id}/apps"
+    expect(page).to have_content("#{@pet1.name} has no current applications.")
   end
 end
