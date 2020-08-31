@@ -61,7 +61,9 @@ RSpec.describe "Apply for pets" do
     expect(current_path).to eq("/favorites")
     expect(page).to have_content("Application successfully submitted!")
 
-    expect(page).to_not have_content(@pet1.name)
+    within ".favorited_pets" do
+      expect(page).to_not have_content(@pet1.name)
+    end
   end
 
   it "New pet application; Sad path submission." do
