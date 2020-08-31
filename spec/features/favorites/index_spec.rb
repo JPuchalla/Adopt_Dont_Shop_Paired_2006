@@ -44,11 +44,11 @@ RSpec.describe "Pet favorites index spec" do
     expect(page).to have_content("No favorited pets.")
   end
 
-  # it "List of Pets that have applications on them" do
-  #   visit "/favorites"
-  #   within ".applied_pets" do
-  #     expect(page).to have_link(@pet1.name)
-  #     expect(page).to have_link(@pet2.name)
-  #   end
-  # end
+  it "List of Pets that have applications on them" do
+    visit "/favorites"
+    within ".applied_pets" do
+      expect(page).to have_link(@pet1.name)
+      expect(page).to have_link(@pet2.name)
+    end
+  end
 end

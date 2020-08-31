@@ -9,6 +9,8 @@ class FavoritesController < ApplicationController
   end
 
   def index
+    app_pets = PetApp.pluck(:pet_id)
+    @pets = app_pets.map {|pet_id| Pet.find(pet_id)}
   end
 
   def show_destroy

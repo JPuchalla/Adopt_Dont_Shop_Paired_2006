@@ -1,14 +1,24 @@
 <h1>Favorite Pets</h1>
+<section class='favorited_pets'>
   <% if favorites.pets.empty? %>
-   <%= "No favorited pets." %>
-   <% else %>
-     <% favorites.favorite_pets.each do |pet| %>
-     <section id="favorites-#{pet.id}">
-       <%= image_tag pet.image, width: 300 %>
-       <h3>Name: <%= link_to(pet.name, "/pets/#{pet.id}") %></h3>
-       <p><%= button_to "Remove From Favorites", "/favorites/#{pet.id}", method: :delete %></p><br>
-     </section>
-     <% end %><br><br>
-   <%= button_to "Remove All Favorites", "/favorites", method: :delete %><br>
-   <%= button_to "Apply For Pets", "/apps/new", method: :get%><br><br>
+  <%= "No favorited pets." %>
+  <% else %>
+  <% favorites.favorite_pets.each do |pet| %>
+  <section id="favorites-#{pet.id}">
+    <%= image_tag pet.image, width: 300 %>
+    <h3>Name: <%= link_to(pet.name, "/pets/#{pet.id}") %></h3>
+    <p><%= button_to "Remove From Favorites", "/favorites/#{pet.id}", method: :delete %></p><br>
+  </section>
+  <% end %><br><br>
+  <%= button_to "Remove All Favorites", "/favorites", method: :delete %><br>
+  <%= button_to "Apply For Pets", "/apps/new", method: :get%><br><br>
+  <% end %><br><br>
+</section>
+
+
+ <h2>Pets with Appliations</h2>
+ <section class="applied_pets">
+   <%  @pets.each do |pet| %>
+   <%= link_to(pet.name, "/pets/#{pet.id}") %>
    <% end %>
+ </section>
