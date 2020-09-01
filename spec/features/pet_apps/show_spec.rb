@@ -14,6 +14,15 @@ RSpec.describe "Pet Applications Show Page" do
     PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
     PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
   end
+  # User Story 22, Approving an Application
+
+  # As a visitor
+  # When I visit an application's show page
+  # For every pet that the application is for, I see a link to approve the application for that specific pet
+  # When I click on a link to approve the application for one particular pet
+  # I'm taken back to that pet's show page
+  # And I see that the pets status has changed to 'pending'
+  # And I see text on the page that says who this pet is on hold for (Ex: "On hold for John Smith", given John Smith is the name on the application that was just accepted)
 
   it "Approving an Application" do
     visit "/apps/#{@application1.id}"
@@ -21,5 +30,9 @@ RSpec.describe "Pet Applications Show Page" do
     within "#app_pets-#{@pet1.id}" do
       click_button("Approve Pet")
     end
+
+    expect(current_path).to eq("/pets/#{@pet1.id}")
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("On hold for #{@application1.name}")
   end
 end
