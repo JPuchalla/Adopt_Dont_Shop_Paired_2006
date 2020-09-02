@@ -52,5 +52,30 @@ RSpec.describe "Pets show Page" do
       visit "/pets/#{@pet1.id}"
       expect(page).to_not have_link("Delete Pet")
     end
+
+    it "Deleting a pet removes it from favorites" do
+      @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+      PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+
+      visit "/pets/#{@pet1.id}"
+      click_button "Add To Favorites"
+      visit "/favorites"
+      expect(page).to have_link(@pet1.name)
+      visit "/pets/#{@pet1.id}"
+      click_link("Delete Pet")
+      # visit "/favorites"
+      # expect(page).to_not have_link("#{@pet1.name}")
+
+    end
+    # [ ] done
+    #
+    # User Story 32, Deleting a pet removes it from favorites
+    #
+    # As a visitor
+    # If I've added a pet to my favorites
+    # When I try to delete that pet from the database
+    # They are also removed from the favorites list
+    # ```
+
   end
 end
