@@ -1,0 +1,15 @@
+<h1><%= @application.name %> Application</h1>
+<p><%= @application.name %></p>
+<p><%= @application.address %></p>
+<p><%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
+<p><%= @application.phone_number %></p>
+<p><%= @application.description %></p>
+<% @application.pets.uniq.each do |pet| %>
+<section id="app_pets-<%= pet.id %>">
+  <% if pet.status == "Adoptable" %>
+    <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Approve Pet", "/apps/#{@application.id}/pets/#{pet.id}/approve", method: :patch %></p>
+  <% elsif pet.status == "Pending" && @application.status == "Approved" %>
+    <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Revoke Application", "/apps/#{@application.id}/pets/#{pet.id}/revoke", method: :patch %></p>
+  <% end %>
+</section>
+<% end %>

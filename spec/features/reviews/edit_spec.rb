@@ -51,8 +51,6 @@ RSpec.describe "Shelters Show Page Reviews" do
 
       click_on "Update Review"
 
-      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/#{@review1.id}/edit")
-
       expect(page).to have_content("Title, rating, and content are required in order to edit review.")
     end
   end

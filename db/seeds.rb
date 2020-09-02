@@ -19,3 +19,15 @@
 #Shelter Reviews
 @review1 = @shelter1.reviews.create!(title: "Terrible Vet", rating: 2, content: "Dog poops everywhere. Not house trained.", image: "https://expertphotography.com/wp-content/uploads/2018/11/dog-photography-eyes.jpg")
 @review2 = @shelter1.reviews.create!(title: "Top notch service.", rating: 5, content: "Groomed my dog, she smells so good!")
+
+#Applications
+@application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+@application2 = App.create!(name: "Red Foreman", address: "4567 Show Rd.", city: "Milwaukee", state: "Wisconsin", zip: "98765", phone_number: "1234567890", description: "Too many kids hanging out in the basement.")
+
+#Pet Applications
+PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
+
+PetApp.create!(pet_id: @pet2.id, app_id: @application1.id)
+
+PetApp.create!(pet_id: @pet3.id, app_id: @application2.id)

@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   def new
     @shelter = Shelter.find(params[:id])
+    # render :new
   end
 
   def create
@@ -10,7 +11,7 @@ class ReviewsController < ApplicationController
       redirect_to "/shelters/#{@shelter.id}"
     else
       flash[:notice] = "Please enter title, rating, and content in order to submit a review."
-      redirect_to "/shelters/#{@shelter.id}/reviews/new"
+      render :new
     end
   end
 
@@ -21,13 +22,15 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:review_id])
+    @review = Review.find(params[:review_id])
     shelter = Shelter.find(params[:id])
-    if review.update(create_update_review_params)
+    @shelter_id = shelter.id
+    @review_id = @review.id
+    if @review.update(create_update_review_params)
       redirect_to "/shelters/#{params[:id]}"
     else
       flash[:notice] = "Title, rating, and content are required in order to edit review."
-      redirect_to "/shelters/#{shelter.id}/reviews/#{review.id}/edit"
+      render :edit
     end
   end
 

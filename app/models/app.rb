@@ -8,5 +8,16 @@ class App < ApplicationRecord
                         :state,
                         :zip,
                         :phone_number,
-                        :description
+                        :description,
+                        :status
+
+  def status_to_approved
+   self.status = "Approved"
+   self.save
+  end
+
+  def status_to_unapproved
+   self.status = "Unapproved"
+   self.save
+  end
 end

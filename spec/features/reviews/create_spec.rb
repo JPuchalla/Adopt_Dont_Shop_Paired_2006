@@ -46,7 +46,6 @@ RSpec.describe "Shelters Show Page Reviews" do
 
       click_on "Create Review"
 
-      expect(current_path).to eq("/shelters/#{@shelter1.id}/reviews/new")
       expect(page).to have_content("Please enter title, rating, and content in order to submit a review.")
     end
   end

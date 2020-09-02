@@ -24,7 +24,8 @@ RSpec.describe "Apply for pets" do
     expect(page).to have_button("Apply For Pets")
   end
 
-  it "Button take me to a create form." do
+  it "Button take me to a new pet application; happy path submission." do
+
     visit "/pets/#{@pet1.id}"
     click_button "Add To Favorites"
 
@@ -54,13 +55,45 @@ RSpec.describe "Apply for pets" do
     fill_in :city, with: "Boise"
     fill_in :state, with: "ID"
     fill_in :zip, with: "98765"
-    fill_in :phone_numer, with: "123-456-7890"
+    fill_in :phone_number, with: "123-456-7890"
     fill_in :description, with: "Need a good ranch dog."
     click_button "Submit Application"
 
     expect(current_path).to eq("/favorites")
     expect(page).to have_content("Application successfully submitted!")
 
-    expect(page).to_not have_content(@pet1.name)
+    within ".favorited_pets" do
+      expect(page).to_not have_content(@pet1.name)
+    end
+  end
+
+  it "New pet application; Sad path submission." do
+    visit "/pets/#{@pet1.id}"
+    click_button "Add To Favorites"
+
+    visit "/pets/#{@pet2.id}"
+    click_button "Add To Favorites"
+
+    visit "/pets/#{@pet3.id}"
+    click_button "Add To Favorites"
+
+    visit "/favorites"
+
+    click_button "Apply For Pets"
+
+    check "select-#{@pet1.name.downcase}"
+    check "select-#{@pet2.name.downcase}"
+
+    fill_in :name, with: "Bob Guy"
+    fill_in :address, with: "12345 Wallaby Way"
+    fill_in :city, with: "Boise"
+    fill_in :state, with: "ID"
+    fill_in :zip, with: "98765"
+    fill_in :phone_number, with: "123-456-7890"
+    fill_in :description, with: ""
+    click_button "Submit Application"
+
+    expect(current_path).to eq("/apps/new")
+    expect(page).to have_content("Please ensure all form fields completed for submission.")
   end
 end
