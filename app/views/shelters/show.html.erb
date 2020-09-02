@@ -1,9 +1,14 @@
 <h2><%= @shelter.name %></h2>
 <p><%= @shelter.address %></p>
 <p><%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %></p>
+<% if @shelter.pets_pending? == true %>
+<p><%= link_to "#{@shelter.name} Pet's", "/shelters/#{@shelter.id}/pets"%></p>
+<p><%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit"%></p>
+<% elsif @shelter.pets_pending? == false %>
 <p><%= link_to "#{@shelter.name} Pet's", "/shelters/#{@shelter.id}/pets"%></p>
 <p><%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit"%></p>
 <p><%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete%></p>
+<% end %>
 <h3>Reviews</h3>
 <% @shelter.reviews.each do |review| %>
 <section id='reviews-<%=review.id%>'>
@@ -16,3 +21,10 @@
 </section>
 <% end %>
 <p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>
+
+<footer>
+  <h2>Shelter Statistics</h2>
+  <p>Pets: <%= @shelter.pet_count %></p>
+  <p>Average Rating: <%= @shelter.reviews.average_rating %></p>
+  <p>Number of Applications: <%= @shelter.apps_on_file.count%></p>
+</footer>

@@ -26,5 +26,23 @@ RSpec.describe "Shelter index Page" do
       expect(current_path).to eq("/shelters")
       expect(page).to have_content("Doggo House")
     end
+
+    it "New Shelter sad path" do
+      visit "/shelters"
+
+      click_link "New Shelter"
+
+      expect(current_path).to eq('/shelters/new')
+
+      fill_in :name, with: "Doggo House"
+      fill_in :address, with: "87654 Doggo Lane"
+      fill_in :city, with: "Boulder"
+      fill_in :state, with: "CO"
+      fill_in :zip, with: ""
+
+      click_on "Create Shelter"
+
+      expect(page).to have_content("Please fill out all fields before submission.")
+    end
   end
 end
