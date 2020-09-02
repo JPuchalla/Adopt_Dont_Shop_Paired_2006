@@ -7,14 +7,21 @@
 
 <% if @approved_apps == [] || @pet.status == "Adoptable"%>
   <% if favorites.pets.has_key?(@pet.id.to_s) %>
-  <%= button_to "Remove From Favorites", "/favorites/pets/#{@pet.id}", method: :delete %>
+    <%= button_to "Remove From Favorites", "/favorites/pets/#{@pet.id}", method: :delete %>
   <% else %>
-  <%= button_to "Add To Favorites", "/favorites/#{@pet.id}", method: :patch %>
+    <%= button_to "Add To Favorites", "/favorites/#{@pet.id}", method: :patch %>
   <% end %>
   <p><%= link_to "#{@pet.name}'s Applicants", "/pets/#{@pet.id}/apps" %></p><br>
   <p><%= link_to "Edit Pet Info", "/pets/#{@pet.id}/edit" %></p><br>
   <p><%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %></p>
+
 <% elsif @approved_apps.first.status == "Approved" && @pet.status == "Pending"%>
-  On hold for <%= @approved_apps.first.name %>
+  <% if favorites.pets.has_key?(@pet.id.to_s) %>
+    <%= button_to "Remove From Favorites", "/favorites/pets/#{@pet.id}", method: :delete %>
+  <% else %>
+    <%= button_to "Add To Favorites", "/favorites/#{@pet.id}", method: :patch %>
+  <% end %>
   <p><%= link_to "#{@pet.name}'s Applicants", "/pets/#{@pet.id}/apps" %></p><br>
+  <p><%= link_to "Edit Pet Info", "/pets/#{@pet.id}/edit" %></p><br>
+  On hold for <%= @approved_apps.first.name %>
 <% end %>

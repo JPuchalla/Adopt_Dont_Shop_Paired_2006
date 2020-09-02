@@ -24,6 +24,33 @@ RSpec.describe "Pets show Page" do
       expect(page).to_not have_content(@pet1.name)
       expect(page).to have_content(@pet2.name)
     end
+
+    it "Pets with approved applications cannot be deleted from index page" do
+      @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+      PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+
+      visit "/apps/#{@application1.id}"
+      within "#app_pets-#{@pet1.id}" do
+        click_button("Approve Pet")
+      end
+
+      visit "/pets"
+
+      within "#pet-#{@pet1.id}" do
+        expect(page).to_not have_link("Delete Pet")
+      end
+    end
+    it "Pets with approved applications cannot be deleted from show page" do
+      @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+      PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+
+      visit "/apps/#{@application1.id}"
+      within "#app_pets-#{@pet1.id}" do
+        click_button("Approve Pet")
+      end
+
+      visit "/pets/#{@pet1.id}"
+      expect(page).to_not have_link("Delete Pet")
+    end
   end
-  
 end
