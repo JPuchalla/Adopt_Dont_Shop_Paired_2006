@@ -5,9 +5,7 @@
 <p>Sex: <%= @pet.sex %></p>
 <p>Status: <%= @pet.status %></p><br>
 
-<% if @approved_apps.first.status == "Approved" %>
-  On hold for <%= @approved_apps.first.name %>
-<% else %>
+<% if @approved_apps == []%>
   <% if favorites.pets.has_key?(@pet.id.to_s) %>
   <%= button_to "Remove From Favorites", "/favorites/pets/#{@pet.id}", method: :delete %>
   <% else %>
@@ -16,4 +14,6 @@
   <p><%= link_to "#{@pet.name}'s Applicants", "/pets/#{@pet.id}/apps" %></p><br>
   <p><%= link_to "Edit Pet Info", "/pets/#{@pet.id}/edit" %></p><br>
   <p><%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %></p>
+<% elsif @approved_apps.first.status == "Approved" %>
+  On hold for <%= @approved_apps.first.name %>
 <% end %>
