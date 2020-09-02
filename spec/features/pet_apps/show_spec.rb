@@ -12,9 +12,10 @@ RSpec.describe "Pet Applications Show Page" do
     @application2 = App.create!(name: "Red Foreman", address: "4567 Show Rd.", city: "Milwaukee", state: "Wisconsin", zip: "98765", phone_number: "1234567890", description: "Too many kids hanging out in the basement.")
 
     PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+    PetApp.create!(pet_id: @pet2.id, app_id: @application1.id)
     PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
   end
-  
+
   it "Approving an Application" do
     visit "/apps/#{@application1.id}"
     expect(page).to have_button("Approve Pet")
@@ -23,6 +24,24 @@ RSpec.describe "Pet Applications Show Page" do
     end
 
     expect(current_path).to eq("/pets/#{@pet1.id}")
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("On hold for #{@application1.name}")
+  end
+
+  it "Approving an Application" do
+    visit "/apps/#{@application1.id}"
+    within "#app_pets-#{@pet1.id}" do
+      click_button("Approve Pet")
+    end
+    expect(current_path).to eq("/pets/#{@pet1.id}")
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("On hold for #{@application1.name}")
+
+    visit "/apps/#{@application1.id}"
+    within "#app_pets-#{@pet2.id}" do
+      click_button("Approve Pet")
+    end
+    expect(current_path).to eq("/pets/#{@pet2.id}")
     expect(page).to have_content("Status: Pending")
     expect(page).to have_content("On hold for #{@application1.name}")
   end
