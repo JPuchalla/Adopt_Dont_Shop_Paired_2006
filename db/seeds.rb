@@ -29,7 +29,5 @@ PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
 PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
 
 PetApp.create!(pet_id: @pet2.id, app_id: @application1.id)
-PetApp.create!(pet_id: @pet2.id, app_id: @application2.id)
 
-PetApp.create!(pet_id: @pet3.id, app_id: @application1.id)
 PetApp.create!(pet_id: @pet3.id, app_id: @application2.id)
