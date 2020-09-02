@@ -38,5 +38,31 @@ RSpec.describe "Shelter pets index page" do
       expect(page).to have_content("Zippy")
       expect(page).to have_content(7)
     end
+
+    it "Create Pet sad path" do
+      visit "/shelters/#{@shelter1.id}/pets"
+
+      click_link "Add New Pet"
+
+
+      fill_in :image, with: "https://i.chzbgr.com/original/2362885/hAB13D999/people-just-cant-stop-photoshopping-this-funny-looking-dog-with-a-gigantic-tongue"
+      fill_in :name, with: "Zippy"
+      fill_in :description, with: "Gots a big toungue. Very good boy."
+      fill_in :age, with: 7
+      fill_in :sex, with: ""
+
+      click_on "Create Pet"
+
+      expect(page).to have_content("Fill in all fields before submission.")
+
+    end
+
+    # User Story 33, Flash Message for Pet Create and Update
+    #
+    # As a visitor
+    # When I am updating or creating a pet
+    # If I try to submit the form with incomplete information
+    # I see a flash message indicating which field(s) I am missing
+    # ```
   end
 end

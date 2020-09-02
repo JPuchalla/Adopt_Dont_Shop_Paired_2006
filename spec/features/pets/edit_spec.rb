@@ -39,5 +39,22 @@ RSpec.describe "Pets show page" do
       expect(page).to have_content(15)
       expect(page).to_not have_content("Courage")
     end
+
+    it "Pet edit sad path" do
+      visit "/pets/#{@pet1.id}"
+
+      click_link "Edit Pet Info"
+
+
+      fill_in :image, with: "https://i.chzbgr.com/original/2362885/hAB13D999/people-just-cant-stop-photoshopping-this-funny-looking-dog-with-a-gigantic-tongue"
+      fill_in :name, with: "Marv"
+      fill_in :description, with: "Gots a big toungue. Very good boy."
+      fill_in :age, with: 15
+      fill_in :sex, with: ""
+
+      click_on "Update Pet"
+
+      expect(page).to have_content("Fill in all fields before submission.")
+    end
   end
 end
