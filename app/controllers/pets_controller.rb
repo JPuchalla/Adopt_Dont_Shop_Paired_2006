@@ -7,6 +7,7 @@ class PetsController < ApplicationController
 
   def show
     @pet = Pet.find(params[:id])
+    @approved_apps = @pet.apps.where({status: "Approved"})
   end
 
   def edit
