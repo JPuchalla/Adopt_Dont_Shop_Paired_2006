@@ -70,5 +70,15 @@ RSpec.describe "Shelter show Page" do
       expect(current_path).to eq("/shelters")
       expect(page).to_not have_link(@shelter1.name)
     end
+
+    it "Deleting Shelters Deletes its Reviews" do
+      @review1 = @shelter1.reviews.create!(title: "Terrible Vet", rating: 2, content: "Dog poops everywhere. Not house trained.", image: "https://expertphotography.com/wp-content/uploads/2018/11/dog-photography-eyes.jpg")
+      @review2 = @shelter1.reviews.create!(title: "Top notch service.", rating: 5, content: "Groomed my dog, she smells so good!")
+
+      visit "/shelters/#{@shelter1.id}"
+      click_link("Delete Shelter")
+      expect(current_path).to eq("/shelters")
+      expect(page).to_not have_link(@shelter1.name)
+    end
   end
 end

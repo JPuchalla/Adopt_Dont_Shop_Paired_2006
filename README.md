@@ -60,15 +60,15 @@ Students will be put into pairs to complete the project.
 This project builds off of the solo project, Adopt Don't Shop. Between you and your partner, choose which one of your repos you'd like to use. If you choose to use Partner A's solo project, Partner A will clone their project into a new directory and push up to a new repo on github. Then, Partner A should add Partner B as a collaborator to that project.
 
 ## Suggested Timeline
-- Monday: 1-4 
+- Monday: 1-4
 - Tuesday: 2-7
-- Wednesday: 8-11 
+- Wednesday: 8-11
 - Thursday: 9-10
-- Friday: 12-15 
-- Weekend: 16-25 
-- Monday: 26-30 
-- Tuesday: 31-33 
-- Wednesday: 34-36 
+- Friday: 12-15
+- Weekend: 16-25
+- Monday: 26-30
+- Tuesday: 31-33
+- Wednesday: 34-36
 
 
 ## User Stories
@@ -489,7 +489,7 @@ All reviews associated with that shelter are also deleted
 
 User Story 29, Flash Messages for Shelter Create and Update
 
-As a visitor
+As a visito
 When I am updating or creating a new shelter
 If I try to submit the form with incomplete information
 I see a flash message indicating which field(s) I am missing
