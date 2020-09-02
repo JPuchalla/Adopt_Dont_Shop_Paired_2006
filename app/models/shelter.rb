@@ -9,7 +9,7 @@ class Shelter < ApplicationRecord
                         :zip
 
   def pets_pending?
-  pets_pend = self.pets.where({status: "Pending"})
-  !pets_pend.empty?
+    pets_pend = self.pets.where({status: "Pending"})
+    !pets_pend.empty?
   end
 end

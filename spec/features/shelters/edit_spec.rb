@@ -33,5 +33,23 @@ RSpec.describe "Shelter show Page" do
       expect(page).to have_content("Cool Pups Club")
       expect(page).to_not have_content("Paw Friends")
     end
+
+    it "Update shelter sad path" do
+      visit "/shelters/#{@shelter1.id}"
+
+      click_link "Update Shelter"
+
+      expect(current_path).to eq("/shelters/#{@shelter1.id}/edit")
+
+      fill_in :name, with: "Doggo House"
+      fill_in :address, with: "87654 Doggo Lane"
+      fill_in :city, with: "Boulder"
+      fill_in :state, with: "CO"
+      fill_in :zip, with: ""
+
+      click_on "Update Shelter"
+
+      expect(page).to have_content("Please fill out all fields before submission.")
+    end
   end
 end
