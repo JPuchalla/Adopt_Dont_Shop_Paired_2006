@@ -37,5 +37,6 @@ Rails.application.routes.draw do
   get "/apps/:id", to: 'apps#show'
 
   get "/pets/:id/apps", to: 'pet_apps#index'
-  patch '/apps/:app_id/pets/:pet_id', to: 'pet_apps#approve'
+  patch '/apps/:app_id/pets/:pet_id/approve', to: 'pet_apps#approve'
+  patch '/apps/:app_id/pets/:pet_id/revoke', to: 'pet_apps#revoke'
 end

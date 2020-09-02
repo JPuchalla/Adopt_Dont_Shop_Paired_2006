@@ -7,7 +7,9 @@
 <% @application.pets.uniq.each do |pet| %>
 <section id="app_pets-<%= pet.id %>">
   <% if pet.status == "Adoptable" %>
-  <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Approve Pet", "/apps/#{@application.id}/pets/#{pet.id}", method: :patch %></p>
+    <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Approve Pet", "/apps/#{@application.id}/pets/#{pet.id}/approve", method: :patch %></p>
+  <% elsif pet.status == "Pending" && @application.status == "Approved" %>
+    <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Revoke Application", "/apps/#{@application.id}/pets/#{pet.id}/revoke", method: :patch %></p>
   <% end %>
 </section>
 <% end %>

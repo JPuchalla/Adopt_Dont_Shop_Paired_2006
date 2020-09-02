@@ -36,4 +36,29 @@ RSpec.describe "Application Show Page" do
     visit "/apps/#{@application2.id}"
     expect(page).to_not have_link(@pet1.name)
   end
+
+  it "Approved Applications can be revoked" do
+    visit "/apps/#{@application1.id}"
+    within "#app_pets-#{@pet1.id}" do
+      click_button("Approve Pet")
+    end
+
+    visit "/apps/#{@application1.id}"
+    within "#app_pets-#{@pet1.id}" do
+      expect(page).to_not have_button("Approve Pet")
+      expect(page).to have_link(@pet1.name)
+      expect(page).to have_button("Revoke Application")
+      click_button "Revoke Application"
+    end
+
+    expect(current_path).to eq("/apps/#{@application1.id}")
+    within "#app_pets-#{@pet1.id}" do
+      expect(page).to have_link(@pet1.name)
+      expect(page).to have_button("Approve Pet")
+    end
+
+    visit "/pets/#{@pet1.id}"
+    expect(page).to have_content("Status: Adoptable")
+    expect(page).to_not have_content("On hold for #{@application1.name}")
+  end
 end
