@@ -63,8 +63,8 @@ RSpec.describe "Pets show Page" do
       expect(page).to have_link(@pet1.name)
       visit "/pets/#{@pet1.id}"
       click_link("Delete Pet")
-      # visit "/favorites"
-      # expect(page).to_not have_link("#{@pet1.name}")
+      visit "/favorites"
+      expect(page).to_not have_link("#{@pet1.name}")
 
     end
     # [ ] done
