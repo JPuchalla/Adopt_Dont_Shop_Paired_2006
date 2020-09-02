@@ -6,7 +6,8 @@ class Pet < ApplicationRecord
   validates_presence_of :image,
                         :name,
                         :age,
-                        :sex
+                        :sex,
+                        :status
 
   def status_to_pending
    self.status = "Pending"
