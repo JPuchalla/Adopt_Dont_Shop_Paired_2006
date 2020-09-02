@@ -9,4 +9,14 @@ class App < ApplicationRecord
                         :zip,
                         :phone_number,
                         :description
+
+  def status_to_approved
+   self.status = "Approved"
+   self.save
+  end
+
+  def status_to_unapproved
+   self.status = "Unapproved"
+   self.save
+  end
 end
