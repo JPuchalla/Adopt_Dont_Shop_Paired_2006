@@ -18,7 +18,7 @@
 
  <h2>Pets with Appliations</h2>
  <section class="applied_pets">
-   <%  @pets.each do |pet| %>
+   <%  @pets.uniq.each do |pet| %>
    <%= link_to(pet.name, "/pets/#{pet.id}") %>
    <% end %>
  </section>

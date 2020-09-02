@@ -4,8 +4,10 @@
 <p><%= @application.city %>, <%= @application.state %> <%= @application.zip %></p>
 <p><%= @application.phone_number %></p>
 <p><%= @application.description %></p>
-<% @application.pets.each do |pet| %>
+<% @application.pets.uniq.each do |pet| %>
 <section id="app_pets-<%= pet.id %>">
+  <% if pet.status == "Adoptable" %>
   <p><%= link_to pet.name, "/pets/#{pet.id}" %>  <%= button_to "Approve Pet", "/apps/#{@application.id}/pets/#{pet.id}", method: :patch %></p>
+  <% end %>
 </section>
 <% end %>

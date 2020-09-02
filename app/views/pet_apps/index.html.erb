@@ -2,7 +2,7 @@
 <% if @current_applicants.empty? %>
   <p><%= @pet.name %> has no current applications.</p>
   <% else %>
-  <% @current_applicants.each do |app| %>
+  <% @current_applicants.uniq.each do |app| %>
   <p><%= link_to app.name, "/apps/#{app.id}" %></p><br>
   <% end %>
 <% end %>
