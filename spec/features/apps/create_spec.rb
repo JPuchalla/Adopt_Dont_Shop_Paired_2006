@@ -25,6 +25,7 @@ RSpec.describe "Apply for pets" do
   end
 
   it "Button take me to a new pet application; happy path submission." do
+
     visit "/pets/#{@pet1.id}"
     click_button "Add To Favorites"
 
