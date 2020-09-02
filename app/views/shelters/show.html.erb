@@ -21,3 +21,10 @@
 </section>
 <% end %>
 <p><%= link_to "New Review", "/shelters/#{@shelter.id}/reviews/new" %></p>
+
+<footer>
+  <h2>Shelter Statistics</h2>
+  <p>Pets: <%= @shelter.pet_count %></p>
+  <p>Average Rating: <%= @shelter.reviews.average_rating %></p>
+  <p>Number of Applications: <%= @shelter.apps_on_file.count%></p>
+</footer>

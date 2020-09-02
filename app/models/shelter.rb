@@ -12,4 +12,16 @@ class Shelter < ApplicationRecord
     pets_pend = self.pets.where({status: "Pending"})
     !pets_pend.empty?
   end
+
+  def apps_on_file
+    self.pets.map do |pet|
+      pet.apps
+    end
+  end
+
+  def pet_count
+    self.pets.count
+  end
+
+
 end

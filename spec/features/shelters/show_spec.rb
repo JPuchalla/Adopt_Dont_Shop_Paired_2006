@@ -43,5 +43,18 @@ RSpec.describe "Shelter show Page" do
       expect(page).to have_content("#{@review1.content}")
       expect(page).to have_css("img[src*='#{@review1.image}']")
     end
+
+    it "Shelter Statistics" do
+      @application1 = App.create!(name: "Bob Guy", address: "3888 Octavius st", city: "Denver", state: "Colorado", zip: "22212", phone_number: "7032220203", description: "Have a big yard and a brush.")
+      @application2 = App.create!(name: "Red Foreman", address: "4567 Show Rd.", city: "Milwaukee", state: "Wisconsin", zip: "98765", phone_number: "1234567890", description: "Too many kids hanging out in the basement.")
+      PetApp.create!(pet_id: @pet1.id, app_id: @application1.id)
+      PetApp.create!(pet_id: @pet1.id, app_id: @application2.id)
+
+      visit "/shelters/#{@shelter1.id}"
+
+      expect(page).to have_content("Pets: 2")
+      expect(page).to have_content("Average Rating: 3.5")
+      expect(page).to have_content("Number of Applications: 2")
+    end
   end
 end
